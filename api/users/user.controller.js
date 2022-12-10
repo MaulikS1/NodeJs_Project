@@ -129,7 +129,7 @@ module.exports = {
             }
 
             const result = compareSync(body.password, results.password);
-            if(result){
+            if(result && results.isActive == 1){
                 results.password = undefined;
                 const jsontoken = sign({ result: results }, "abcdQ123", {
                     expiresIn: "30m"
@@ -138,6 +138,12 @@ module.exports = {
                     success: 1,
                     message: "Login Successfully.",
                     token: jsontoken
+                });
+            }
+            else if(result && results.isActive == 0){
+                return res.json({
+                    success: 101,
+                    message: "User is Inactive, please contact administrator!."
                 });
             }
             else{

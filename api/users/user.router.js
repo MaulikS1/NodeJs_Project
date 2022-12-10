@@ -8,7 +8,7 @@ router.get("/getAllUsers", checkToken, getUsers);
 router.get("/:id", checkToken ,getUserByUserId);
 router.patch("/", checkToken ,updateUser);
 router.delete("/", checkToken ,deleteUser);
-router.post("/login", login); 
+router.post("/authenticate", login); 
 
 
 module.exports = router;
