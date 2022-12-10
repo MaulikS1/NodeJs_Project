@@ -75,7 +75,7 @@ module.exports = {
                 if(error){
                     return callBack(error);
                 }
-                return callBack(null, results);
+                return callBack(null, results.affectedRows);
             }
         );
     },
@@ -85,6 +85,7 @@ module.exports = {
             `select * from admin_users where email= ?`,
             [email],
             (error, results, fields) => {
+                console.log("Results==>",results);
                 if(error){
                     return callBack(error);
                 }

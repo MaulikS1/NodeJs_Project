@@ -98,6 +98,7 @@ module.exports = {
                 console.log(err);
                 return;
             }
+            console.log("Results =>",results);
             if(!results){
                 console.log(results);
                 return res.json({
@@ -105,10 +106,12 @@ module.exports = {
                     message: "Record Not Found."
                 });
             }
-            return res.json({
-                success: 1,
-                message: "User Deleted Successfully."
-            });
+            else{
+                return res.json({
+                    success: 1,
+                    message: "User Deleted Successfully."
+                });
+            }
         });
     },
 
