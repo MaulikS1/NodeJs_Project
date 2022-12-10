@@ -3,11 +3,14 @@ const pool = require("../../config/database");
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            `insert into admin_users(name, email, password) values(?,?,?)`,
+            `insert into admin_users(name, email, password, createdDate, endDate, isActive) values(?,?,?,?,?,?)`,
             [
                 data.name,
                 data.email,
-                data.password
+                data.password,
+                data.createdDate,
+                data.endDate,
+                data.isActive
             ],
             (error, results, fields) => {
                 if (error){
@@ -20,7 +23,7 @@ module.exports = {
     
     getUsers: callBack => {
         pool.query(
-            `select userid, name, email from admin_users`,
+            `select admin_id, name, email, createdDate, endDate, isActive from admin_users`,
             [],
             (error, results, fields) => {
                 if(error) {
@@ -33,7 +36,7 @@ module.exports = {
 
     getUserByUserId: (id, callBack) => {
         pool.query(
-            `select userid, name, email from admin_users where userid= ?`,
+            `select admin_id, name, email, createdDate, endDate, isActive from admin_users where email= ?`,
             [id],
             (error, results, fields) => {
                 if(error){
@@ -46,12 +49,12 @@ module.exports = {
 
     updateUser: (data, callBack) => {
         pool.query(
-            `update admin_users set name=?, email=?, password=? where userid=?`,
+            `update admin_users set name=?, email=?, password=? where admin_id=?`,
             [
                 data.name,
                 data.email,
                 data.password,
-                data.userid
+                data.admin_id
             ],
             (error, results, fields) => {
                 if(error){
@@ -64,9 +67,9 @@ module.exports = {
 
     deleteUser: (data, callBack) => {
         pool.query(
-            `delete from admin_users where userid=?`,
+            `delete from admin_users where admin_id=?`,
             [
-                data.userid
+                data.admin_id
             ],
             (error, results, fields) => {
                 if(error){
