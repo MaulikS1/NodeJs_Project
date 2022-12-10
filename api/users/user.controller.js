@@ -10,6 +10,9 @@ module.exports = {
         console.log("Print Password --->>", body.password);
         console.log("Print Name --->>", body.name);
         console.log("Print Email --->>", body.email);
+        console.log("Print Email --->>", body.createdDate);
+        console.log("Print Email --->>", body.endDate);
+        console.log("Print Email --->>", body.isActive);
         const salt = genSaltSync(10);
         body.password = hashSync(body.password,salt);
         create(body, (err, results) => {
