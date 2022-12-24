@@ -7,11 +7,11 @@ pipeline{
                 sh "npm install"
             }
         }
-        stage("Build"){
-            steps{
-                 // sh "npm start"
-            }
-        }
+        // stage("Build"){
+        //     steps{
+        //          sh "npm start"
+        //     }
+        // }
       
         // stage("Deploy"){
         //      steps{
