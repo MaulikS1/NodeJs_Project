@@ -1,5 +1,5 @@
 const { response } = require("express");
-const { create, getUsers, getUserByUserId, updateUser, deleteUser, getUserByUserEmail } =  require("./user.service");
+const { create, getUsers, getUserByUserId, updateUser, deleteUser, getUserByUserEmail, resetPassword, resetPasswordLink } =  require("./user.service");
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken"); 
 
@@ -87,6 +87,59 @@ module.exports = {
             return res.json({
                 success: 1,
                 message: "User Details Updated Successfully."
+            });
+        });
+    },
+
+    resetPassword: (req, res) => {
+        const body = req.body;
+        const salt = genSaltSync(10);
+        body.password = hashSync(body.password, salt);
+        resetPassword(body, (err, results) => {
+            if(err){
+                console.log(results)
+                console.log(err);
+                return res.json({
+                    success: 0,
+                    message: "Filed to update password."
+                });ś
+            }
+            if(!results){
+                return res.json({
+                    success: 0,
+                    message: "Filed to update password."
+                });
+            }
+            console.log(results)
+            return res.json({
+                success: 1,
+                message: "Password Updated Successfully."
+            });
+        });
+    },
+
+    resetPasswordLink: (req, res) => {
+        const body = req.body;
+        
+        resetPasswordLink(body, (err, results) => {
+            if(err){
+                console.log("reset password response =>",results);
+                console.log(err);
+                return res.json({
+                    success: 0,
+                    message: "Filed to send reset password link."
+                });ś
+            }
+            if(!results){
+                return res.json({
+                    success: 0,
+                    message: "Filed to send reset password link."
+                });
+            }
+            // console.log("Reset Password Results in controller ===>",results[0]);
+            return res.json({
+                success: 1,
+                message: "Password reset link sent successfully."
             });
         });
     },

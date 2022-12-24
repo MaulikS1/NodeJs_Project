@@ -13,8 +13,8 @@ async function main() {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "maulikpshah47@gmail.com", // generated ethereal user
-      pass: "U4D0ITbC9ytkXKch", // generated ethereal password
+      user: "solanki.maulik@outlook.com", // generated ethereal user
+      pass: "3nT2caD7SRJdtp0C", // generated ethereal password
     },
   });
 
